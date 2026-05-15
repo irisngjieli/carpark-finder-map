@@ -16,6 +16,7 @@ import {
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import { svy21ToWgs84 } from "svy21";
+import DisqusComments from "../components/DisqusComments";
 
 // Matches the CSV header: SN,GANTRY_HEIGHT,ADDRESS,CAR_PARK_NO,X_COORD,Y_COORD,CAR_PARK_TYPE
 interface Carpark {
@@ -188,11 +189,10 @@ const HomePage = () => {
               {filteredCarparks.map((carpark) => (
                 <Grid item xs={12} sm={6} md={4} key={carpark.CAR_PARK_NO}>
                   <Card
-                    sx={{ height: "100%", cursor: "pointer" }}
-                    onClick={() => handleOpenMap(carpark)}
+                    sx={{ height: "100%" }}
                   >
                     <CardContent>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography variant="h6" gutterBottom style={{cursor: 'pointer'}} onClick={() => handleOpenMap(carpark)}>
                         {carpark.ADDRESS}
                       </Typography>
                       <Typography color="text.secondary">
@@ -212,6 +212,7 @@ const HomePage = () => {
           )}
         </Box>
       ) : null}
+      <DisqusComments />
     </Container>
   );
 };
