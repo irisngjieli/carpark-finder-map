@@ -18,6 +18,7 @@ import Papa from "papaparse";
 import type { ParseResult } from "papaparse";
 import { svy21ToWgs84 } from "svy21";
 import DisqusComments from "../components/DisqusComments";
+import carparkDataUrl from '../assets/Carpark_gantryheight.csv';
 
 // Matches the CSV header: SN,GANTRY_HEIGHT,ADDRESS,CAR_PARK_NO,X_COORD,Y_COORD,CAR_PARK_TYPE
 interface Carpark {
@@ -42,7 +43,7 @@ const HomePage = () => {
      * Fetches and parses the carpark data from the local CSV file.
      */
     const fetchCarparkData = async () => {
-      const response = await fetch("/Carpark_gantryheight.csv");
+      const response = await fetch(carparkDataUrl);
       const reader = response.body!.getReader();
       const result = await reader.read();
       const decoder = new TextDecoder("utf-8");
