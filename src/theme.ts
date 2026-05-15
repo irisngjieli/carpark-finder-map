@@ -13,7 +13,10 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
+    h2: {
+      fontWeight: 700,
+    }
   },
 });
 

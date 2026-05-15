@@ -98,7 +98,15 @@ const HomePage = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ my: 4, textAlign: "center" }}>
+      <Box
+        sx={{
+          my: 4,
+          textAlign: "center",
+          p: 2,
+          borderRadius: 4,
+          boxShadow: "0 3px 5px 2px rgba(0, 0, 0, .1)",
+        }}
+      >
         <Typography variant="h2" component="h1" gutterBottom>
           Public Carpark Finder
         </Typography>
@@ -115,7 +123,7 @@ const HomePage = () => {
           gap: 3,
           p: 3,
           backgroundColor: "background.paper",
-          borderRadius: 2,
+          borderRadius: 4,
           boxShadow: 1,
           mb: 4,
         }}
@@ -169,35 +177,40 @@ const HomePage = () => {
       </Box>
 
       {searchPerformed ? (
-        filteredCarparks.length === 0 ? (
-          <Typography sx={{ textAlign: "center", my: 5 }}>
-            No carparks found matching your criteria. Please try a different
-            search.
-          </Typography>
-        ) : (
-          <Grid container spacing={2}>
-            {filteredCarparks.map((carpark) => (
-              <Grid item xs={12} sm={6} md={4} key={carpark.CAR_PARK_NO}>
-                <Card sx={{ height: "100%", cursor: "pointer" }} onClick={() => handleOpenMap(carpark)}>
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                      {carpark.ADDRESS}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      Type: {carpark.CAR_PARK_TYPE}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      Height Limit:{" "}
-                      {carpark.GANTRY_HEIGHT === 0
-                        ? "No limit"
-                        : `${carpark.GANTRY_HEIGHT}m`}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        )
+        <Box sx={{ p: 3, borderRadius: 4, boxShadow: 1, backgroundColor: "background.paper" }}>
+          {filteredCarparks.length === 0 ? (
+            <Typography sx={{ textAlign: "center", my: 5 }}>
+              No carparks found matching your criteria. Please try a different
+              search.
+            </Typography>
+          ) : (
+            <Grid container spacing={2}>
+              {filteredCarparks.map((carpark) => (
+                <Grid item xs={12} sm={6} md={4} key={carpark.CAR_PARK_NO}>
+                  <Card
+                    sx={{ height: "100%", cursor: "pointer" }}
+                    onClick={() => handleOpenMap(carpark)}
+                  >
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {carpark.ADDRESS}
+                      </Typography>
+                      <Typography color="text.secondary">
+                        Type: {carpark.CAR_PARK_TYPE}
+                      </Typography>
+                      <Typography color="text.secondary">
+                        Height Limit:{" "}
+                        {carpark.GANTRY_HEIGHT === 0
+                          ? "No limit"
+                          : `${carpark.GANTRY_HEIGHT}m`}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
       ) : null}
     </Container>
   );
