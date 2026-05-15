@@ -15,7 +15,8 @@ import {
   Grid,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import Papa, { ParseResult } from "papaparse";
+import Papa from "papaparse";
+import type { ParseResult } from "papaparse";
 import { svy21ToWgs84 } from "svy21";
 import DisqusComments from "../components/DisqusComments";
 
@@ -139,7 +140,7 @@ const HomePage = () => {
           fullWidth
           value={vehicleHeight}
           onChange={(e) => setVehicleHeight(e.target.value)}
-          inputProps={{ inputProps: { step: 0.1, min: 0 } }}
+          inputProps={{ step: 0.1, min: 0 }}
           aria-label="Vehicle Height in meters"
         />
         <TextField
