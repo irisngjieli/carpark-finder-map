@@ -14,7 +14,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import Papa from "papaparse";
+import Papa, { ParseResult } from "papaparse";
 import { svy21ToWgs84 } from "svy21";
 import DisqusComments from "../components/DisqusComments";
 
@@ -51,8 +51,8 @@ const HomePage = () => {
         header: true,
         skipEmptyLines: true,
         dynamicTyping: true,
-        complete: (results) => {
-          const carparkData = results.data as Carpark[];
+        complete: (results: ParseResult<Carpark>) => {
+          const carparkData = results.data;
           console.log("Loaded", carparkData.length, "carparks.");
           setAllCarparks(carparkData);
         },
@@ -138,7 +138,7 @@ const HomePage = () => {
           fullWidth
           value={vehicleHeight}
           onChange={(e) => setVehicleHeight(e.target.value)}
-          InputProps={{ inputProps: { step: 0.1, min: 0 } }}
+          inputProps={{ inputProps: { step: 0.1, min: 0 } }}
           aria-label="Vehicle Height in meters"
         />
         <TextField
