@@ -54,7 +54,6 @@ const HomePage = () => {
           const carparkData = results.data as Carpark[];
           console.log("Loaded", carparkData.length, "carparks.");
           setAllCarparks(carparkData);
-          setFilteredCarparks(carparkData);
         },
       });
     };
@@ -169,35 +168,37 @@ const HomePage = () => {
         </Button>
       </Box>
 
-      {searchPerformed && filteredCarparks.length === 0 ? (
-        <Typography sx={{ textAlign: "center", my: 5 }}>
-          No carparks found matching your criteria. Please try a different
-          search.
-        </Typography>
-      ) : (
-        <Grid container spacing={2}>
-          {filteredCarparks.map((carpark) => (
-            <Grid item xs={12} sm={6} md={4} key={carpark.CAR_PARK_NO}>
-              <Card sx={{ height: "100%", cursor: "pointer" }} onClick={() => handleOpenMap(carpark)}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    {carpark.ADDRESS}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    Type: {carpark.CAR_PARK_TYPE}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    Height Limit:{" "}
-                    {carpark.GANTRY_HEIGHT === 0
-                      ? "No limit"
-                      : `${carpark.GANTRY_HEIGHT}m`}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      )}
+      {searchPerformed ? (
+        filteredCarparks.length === 0 ? (
+          <Typography sx={{ textAlign: "center", my: 5 }}>
+            No carparks found matching your criteria. Please try a different
+            search.
+          </Typography>
+        ) : (
+          <Grid container spacing={2}>
+            {filteredCarparks.map((carpark) => (
+              <Grid item xs={12} sm={6} md={4} key={carpark.CAR_PARK_NO}>
+                <Card sx={{ height: "100%", cursor: "pointer" }} onClick={() => handleOpenMap(carpark)}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      {carpark.ADDRESS}
+                    </Typography>
+                    <Typography color="text.secondary">
+                      Type: {carpark.CAR_PARK_TYPE}
+                    </Typography>
+                    <Typography color="text.secondary">
+                      Height Limit:{" "}
+                      {carpark.GANTRY_HEIGHT === 0
+                        ? "No limit"
+                        : `${carpark.GANTRY_HEIGHT}m`}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )
+      ) : null}
     </Container>
   );
 };
